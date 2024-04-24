@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 class todo(models.Model):
@@ -8,3 +9,8 @@ class todo(models.Model):
 
     class Meta:
         ordering = ["deadline"]
+
+    def mark_has_complete(self):
+        if not self.finished_at:
+            self.finished_at = date.today()
+            self.save()
